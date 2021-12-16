@@ -39,7 +39,7 @@ services:
 networks: 
   web_network: 
   driver: bridge
-```YAML
+```
 
 集群中共三个服务，Nginx_proxy、Nginx_http1和Nginx_http2，其中Nginx_proxy提供负载均衡服务，Nginx_http1和Nginx_http2提供网页服务。
 这三个服务对应的容器的来源镜像都基于 NginxDockerfile，容器的网络都是所定义的桥接网络 web_network。
@@ -84,7 +84,7 @@ http {
     include /etc/nginx/conf.d/*.conf; 
     include /etc/nginx/sites-enabled/*;
 }
-```YAML
+```
 该配置文件中配置了负载均衡策略，所配置的内容是 http 中的 upstream 和 server。
 首先通过 upstream 定义一个负载均衡池 http_pool，在池中通过 server 定义了两个服务器，即Nginx_http1 和 Nginx_http2。
 并通过 weight 指定了它们的权重，权重越大，则该服务器被用户访问的可能性越大；
@@ -101,7 +101,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt dist-upgrade -y \
              && apt install nginx -y
 CMD nginx -c /etc/nginx/nginx.conf 
-```YAML
+```
 该 Dockerfile 中定义了基于 ubuntu 镜像部署 Nginx 服务的操作，首先将资源文件sources.list 通 过 ADD 添 加 到 待 构 建镜像的 /etc/apt 下 ； 
 然 后 定 义 环 境 变 量DEBIAN_FRONTEND，其值为 noninteractive，该环境变量的功能是去掉 apt 的交互操作，如果不定义该环境变量，安装 Nginx 时可能需要用户输入时区配置；
 再通过 RUN 指定安装Nginx 的指令，通过 apt update 和 apt dist-upgrade 更新系统，再通过 apt install nginx -y 安装Nginx ； 
