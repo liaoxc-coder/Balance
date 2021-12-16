@@ -7,8 +7,9 @@ NginxDockerfile 的功能是基于 ubuntu 镜像构建 Nginx 镜像，容器集�
 sources.list 是 ubuntu 的软件源配置，用于加速软件安装；
 web1 和web2 目录是 Nginx_http1 和 Nginx_http2 容器中 Nginx 服务的网页文件目录，其中保存了网页的首页文件。
 </br>
-2、docker-compose.yml内容如下：
 
+2、docker-compose.yml内容说明：
+```Java
 version: '3.8' 
 services: 
   Nginx_proxy: 
@@ -39,6 +40,7 @@ services:
 networks: 
   web_network: 
   driver: bridge
+```Java
 
 集群中共三个服务，Nginx_proxy、Nginx_http1和Nginx_http2，其中Nginx_proxy提供负载均衡服务，Nginx_http1和Nginx_http2提供网页服务。这三个服务对应的容器的来源镜像都基于 NginxDockerfile，容器的网络都是所定义的桥接网络 web_network。指定 Nginx_proxy 服务的 8000 端口映射到宿主机的 8000端口，将项目资源文件中的 nginx.conf 绑定挂载到容器的/etc/nginx/nginx.conf。将网页目录web1 和 web2 分别绑定挂载到对应服务的/var/www/html，指定 Nginx_http1 和 Nginx_http2服务启动后运行的指令是 nginx -c /etc/nginx/nginx.conf -g "daemon off;"，该指令的功能是启动 Nginx 服务。
 
