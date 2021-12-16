@@ -1,0 +1,7 @@
+FROM ubuntu 
+MAINTAINER lxc
+ADD sources.list /etc/apt
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt dist-upgrade -y \
+             && apt install nginx -y
+CMD nginx -c /etc/nginx/nginx.conf 
