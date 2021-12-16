@@ -1,16 +1,12 @@
+<br>
 1、项目结构总览，新建 nginx 目录用于保存本项目所需文件，项目中文件及目录结构。
 其中，docker-compose.yml 是 Docker compose 配置文件，定义了服务、
 容器及容器行为，docker-compose的版本是1.27.4；
-
 nginx.conf 是 Nginx 的配置文件，其中配置了负载均衡策略；
 NginxDockerfile 的功能是基于 ubuntu 镜像构建 Nginx 镜像，容器集群中三个容器均基于该镜像；
-
 sources.list 是 ubuntu 的软件源配置，用于加速软件安装；
-
 web1 和web2 目录是 Nginx_http1 和 Nginx_http2 容器中 Nginx 服务的网页文件目录，其中保存了网页的首页文件。
-
-<img src="file:///C:/Users/lxc/AppData/Roaming/marktext/images/2021-12-15-23-23-19-image.png" title="" alt="" data-align="center">
-
+</br>
 2、docker-compose.yml内容如下：
 
 version: '3.8' 
